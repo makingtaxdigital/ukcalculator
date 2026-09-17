@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About the free Making Tax Digital side-hustle checker — why it was built and what it does.">
+<title>About — Making Tax Digital Checker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,540;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16212C; --ink-soft:#56616B; --paper:#EFF1EC; --surface:#FFFFFF;
+    --line:#D9DDD3; --line-strong:#B9C0B4;
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius:4px; --max:760px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:44px 20px 64px; }
+  a{ color:var(--ink); }
+  .back{ display:inline-block; font-size:13.5px; font-weight:600; color:var(--ink-soft); text-decoration:none; margin-bottom:22px; }
+  .back:hover{ color:var(--ink); }
+  h1{
+    font-family:var(--font-display); font-optical-sizing:auto; font-weight:540;
+    font-size:clamp(26px, 6vw, 36px); line-height:1.16; letter-spacing:-0.01em;
+    margin:0 0 22px;
+  }
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; margin-bottom:20px;
+  }
+  .panel p{ font-size:15px; margin:0 0 14px; }
+  .panel p:last-child{ margin-bottom:0; }
+  footer{ margin-top:26px; font-size:12.5px; color:var(--ink-soft); }
+  footer a{ color:var(--ink-soft); }
+  @media (max-width:480px){ .wrap{ padding:32px 16px 48px; } .panel{ padding:20px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to the calculator</a>
+  <h1>About this calculator</h1>
+
+  <div class="panel">
+    <p>This is a small, free tool built to answer one specific question: does HMRC's Making Tax Digital rule apply to your side hustle, and if not yet, when will it?</p>
+    <p>It exists because most people running a side hustle — selling on Etsy or eBay, doing a bit of tutoring, taking on freelance work alongside a main job — have never heard of Making Tax Digital, and the guidance that does exist is often written for accountants rather than for someone just trying to get a straight answer.</p>
+    <p>It was built by one person, using AI tools to help with the research, the writing, and the code, then checked by hand against HMRC's own published rates and thresholds.</p>
+  </div>
+
+  <div class="panel">
+    <p>This site isn't affiliated with HMRC or the UK government in any way — it's an independent, unofficial tool. For anything specific to your own situation, <a href="https://www.gov.uk/guidance/using-making-tax-digital-for-income-tax" target="_blank" rel="noopener">gov.uk</a> or a qualified accountant is the right place to go.</p>
+    <p>The site occasionally links to accounting software (like Xero) that's actually built to handle Making Tax Digital submissions — see the <a href="privacy.html">privacy page</a> for how that works.</p>
+  </div>
+
+  <footer>
+    <p><a href="index.html">Calculator</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></p>
+  </footer>
+</div>
+</body>
+</html>

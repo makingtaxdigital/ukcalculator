@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free calculator: find out if and when HMRC's Making Tax Digital rules apply to your UK side hustle, based on the 2026-2028 turnover thresholds, plus a rough tax estimate.">
+<meta property="og:title" content="Will Making Tax Digital catch your side hustle?">
+<meta property="og:description" content="A free calculator for UK side-hustlers — check if HMRC's new digital tax rules apply to you, and when.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<title>Will Making Tax Digital catch your side hustle?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,540;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#16212C;
+    --ink-soft:#56616B;
+    --paper:#EFF1EC;
+    --surface:#FFFFFF;
+    --line:#D9DDD3;
+    --line-strong:#B9C0B4;
+
+    --green:#1E6E52;
+    --green-tint:#E3EEE7;
+    --amber:#8C5D1E;
+    --amber-tint:#F2E7D3;
+    --rust:#9C3D28;
+    --rust-tint:#F3E0D9;
+
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --radius:4px;
+    --max:760px;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:44px 20px 64px;
+  }
+
+  /* ---------- Header ---------- */
+
+  header{
+    margin-bottom:36px;
+  }
+
+  h1{
+    font-family:var(--font-display);
+    font-optical-sizing:auto;
+    font-weight:540;
+    font-size:clamp(28px, 6vw, 40px);
+    line-height:1.14;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+    max-width:16ch;
+  }
+
+  .lede{
+    font-size:16.5px;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:0;
+  }
+
+  /* ---------- Card shell ---------- */
+
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px;
+    margin-bottom:22px;
+  }
+
+  .panel + .panel{ margin-top:22px; }
+
+  .panel-title{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:15px;
+    margin:0 0 18px;
+  }
+
+  /* ---------- Inputs ---------- */
+
+  .field{
+    margin-bottom:18px;
+  }
+  .field:last-child{ margin-bottom:0; }
+
+  .field label{
+    display:block;
+    font-weight:600;
+    font-size:14.5px;
+    margin-bottom:4px;
+  }
+
+  .field .hint{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+
+  .money-input{
+    display:flex;
+    align-items:center;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    background:var(--paper);
+    overflow:hidden;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+
+  .money-input:focus-within{
+    border-color:var(--ink);
+    box-shadow:0 0 0 3px rgba(22,33,44,0.1);
+  }
+
+  .money-input .sym{
+    padding:12px 4px 12px 14px;
+    font-weight:600;
+    color:var(--ink-soft);
+    font-variant-numeric:tabular-nums;
+  }
+
+  .money-input input{
+    flex:1;
+    border:0;
+    background:transparent;
+    padding:12px 14px 12px 4px;
+    font-family:var(--font-body);
+    font-size:17px;
+    font-weight:600;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+    min-width:0;
+  }
+
+  .money-input input:focus{ outline:none; }
+
+  .money-input input::-webkit-outer-spin-button,
+  .money-input input::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+  }
+
+  /* ---------- Timeline (hero visual) ---------- */
+
+  .timeline{
+    padding:30px 24px 26px;
+  }
+
+  .tl-row{
+    margin-bottom:22px;
+  }
+  .tl-row:last-child{ margin-bottom:0; }
+
+  .tl-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:8px;
+  }
+
+  .tl-year{
+    font-family:var(--font-display);
+    font-weight:540;
+    font-size:19px;
+  }
+
+  .tl-status{
+    font-size:13px;
+    font-weight:600;
+  }
+
+  .tl-track{
+    position:relative;
+    height:10px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px;
+  }
+
+  .tl-fill{
+    position:absolute;
+    top:-1px; left:-1px; bottom:-1px;
+    border-radius:3px 0 0 3px;
+    background:var(--green-tint);
+    border-right:1px solid var(--line-strong);
+    transition:width .5s cubic-bezier(.2,.7,.3,1);
+  }
+
+  .tl-marker{
+    position:absolute;
+    top:50%;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--ink);
+    border:2px solid var(--surface);
+    box-shadow:0 0 0 1px var(--ink);
+    transform:translate(-50%,-50%);
+    transition:left .5s cubic-bezier(.2,.7,.3,1), background-color .3s ease;
+  }
+
+  .tl-threshold-label{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- Status result ---------- */
+
+  .status{
+    border-left:3px solid var(--green);
+    background:var(--green-tint);
+    padding:18px 20px;
+    border-radius:0 var(--radius) var(--radius) 0;
+    transition:border-color .3s ease, background-color .3s ease;
+  }
+
+  .status.is-amber{ border-color:var(--amber); background:var(--amber-tint); }
+  .status.is-rust{ border-color:var(--rust); background:var(--rust-tint); }
+
+  .status-head{
+    font-family:var(--font-display);
+    font-weight:540;
+    font-size:19px;
+    margin:0 0 6px;
+  }
+
+  .status.is-amber .status-head{ color:var(--amber); }
+  .status.is-rust .status-head{ color:var(--rust); }
+  .status .status-head{ color:var(--green); }
+
+  .status p{
+    margin:0;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+
+  .trap-note{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed var(--line-strong);
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .trap-note strong{ color:var(--ink); }
+
+  /* ---------- Tax table ---------- */
+
+  .ledger{
+    width:100%;
+    border-collapse:collapse;
+  }
+
+  .ledger tr{
+    border-bottom:1px solid var(--line);
+  }
+
+  .ledger tr:last-child{ border-bottom:0; }
+
+  .ledger td{
+    padding:10px 0;
+    font-size:14.5px;
+  }
+
+  .ledger td:last-child{
+    text-align:right;
+    font-variant-numeric:tabular-nums;
+    font-weight:600;
+    white-space:nowrap;
+  }
+
+  .ledger .muted{ color:var(--ink-soft); font-weight:400; }
+
+  .ledger tr.total td{
+    padding-top:14px;
+    font-weight:700;
+    font-size:15.5px;
+    border-top:2px solid var(--ink);
+    border-bottom:0;
+  }
+
+  .ledger tr.take-home td{
+    padding-top:12px;
+    color:var(--green);
+    font-weight:700;
+  }
+
+  .ledger-note{
+    margin:16px 0 0;
+    padding-top:14px;
+    border-top:1px dashed var(--line-strong);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Copy button ---------- */
+
+  .copy-panel{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
+  .copy-btn{
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    padding:11px 18px;
+    cursor:pointer;
+    transition:border-color .15s ease, background-color .15s ease;
+  }
+  .copy-btn:hover{ border-color:var(--ink); }
+  .copy-btn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+  .copy-status{
+    margin:0;
+    font-size:13.5px;
+    color:var(--green);
+    font-weight:600;
+  }
+
+  /* ---------- Explainer ---------- */
+
+  .explainer p{
+    font-size:14.5px;
+    color:var(--ink);
+    margin:0 0 14px;
+  }
+  .explainer p:last-child{ margin-bottom:0; }
+  .explainer a{ color:var(--ink); text-decoration-color:var(--line-strong); }
+  .explainer a:hover{ text-decoration-color:var(--ink); }
+
+  /* ---------- CTA ---------- */
+
+  .cta{
+    background:var(--ink);
+    color:var(--paper);
+    padding:26px;
+    border-radius:var(--radius);
+  }
+
+  .cta h2{
+    font-family:var(--font-display);
+    font-weight:540;
+    font-size:20px;
+    margin:0 0 8px;
+    color:#fff;
+  }
+
+  .cta p{
+    font-size:14.5px;
+    color:#C7CDC3;
+    margin:0 0 18px;
+    max-width:48ch;
+  }
+
+  .cta-btn{
+    display:inline-block;
+    background:var(--surface);
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:600;
+    font-size:14.5px;
+    padding:12px 22px;
+    border-radius:var(--radius);
+    transition:opacity .15s ease;
+  }
+  .cta-btn:hover{ opacity:.85; }
+  .cta-btn:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+
+  .disclosure{
+    font-size:12.5px;
+    color:#AFB6A9;
+    margin:14px 0 0;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    margin-top:30px;
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:60ch;
+  }
+  footer p{ margin:0 0 10px; }
+  footer p:last-child{ margin-bottom:0; }
+
+  /* ---------- Accessibility & motion ---------- */
+
+  a{ color:inherit; }
+
+  :focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .tl-fill, .tl-marker{ transition:none; }
+  }
+
+  @media (max-width:480px){
+    .wrap{ padding:32px 16px 48px; }
+    .panel{ padding:20px; }
+    .timeline{ padding:22px 16px 20px; }
+    .tl-top{ flex-direction:column; align-items:flex-start; gap:2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <h1>Will Making Tax Digital catch your side hustle?</h1>
+    <p class="lede">HMRC's new digital tax rules are rolling out in stages. Add up what your side hustle actually brings in, and find out if — and when — the rules reach you.</p>
+  </header>
+
+  <div class="panel">
+    <p class="panel-title">Your numbers</p>
+
+    <div class="field">
+      <label for="turnover">What your side hustle brings in</label>
+      <p class="hint">Total sales this year, before any costs come out</p>
+      <div class="money-input">
+        <span class="sym">£</span>
+        <input type="number" id="turnover" inputmode="numeric" min="0" step="500" value="32000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="expenses">What it costs you to run</label>
+      <p class="hint">Materials, fees, postage, mileage — a rough guess is fine</p>
+      <div class="money-input">
+        <span class="sym">£</span>
+        <input type="number" id="expenses" inputmode="numeric" min="0" step="100" value="6000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="property">Rental or property income (if any)</label>
+      <p class="hint">MTD counts this together with your side hustle — leave at 0 if none</p>
+      <div class="money-input">
+        <span class="sym">£</span>
+        <input type="number" id="property" inputmode="numeric" min="0" step="500" value="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel timeline">
+    <p class="panel-title">The threshold, as it drops</p>
+
+    <div class="tl-row" data-year="2026">
+      <div class="tl-top">
+        <span class="tl-year">April 2026</span>
+        <span class="tl-status" id="stat-2026"></span>
+      </div>
+      <div class="tl-track">
+        <div class="tl-fill" id="fill-2026"></div>
+        <div class="tl-marker" id="marker-2026"></div>
+      </div>
+      <p class="tl-threshold-label">Applies over £50,000 — already in force</p>
+    </div>
+
+    <div class="tl-row" data-year="2027">
+      <div class="tl-top">
+        <span class="tl-year">April 2027</span>
+        <span class="tl-status" id="stat-2027"></span>
+      </div>
+      <div class="tl-track">
+        <div class="tl-fill" id="fill-2027"></div>
+        <div class="tl-marker" id="marker-2027"></div>
+      </div>
+      <p class="tl-threshold-label">Applies over £30,000</p>
+    </div>
+
+    <div class="tl-row" data-year="2028">
+      <div class="tl-top">
+        <span class="tl-year">April 2028</span>
+        <span class="tl-status" id="stat-2028"></span>
+      </div>
+      <div class="tl-track">
+        <div class="tl-fill" id="fill-2028"></div>
+        <div class="tl-marker" id="marker-2028"></div>
+      </div>
+      <p class="tl-threshold-label">Applies over £20,000</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="status" id="status-box">
+      <p class="status-head" id="status-head"></p>
+      <p id="status-body"></p>
+    </div>
+    <div class="trap-note" id="trap-note"></div>
+  </div>
+
+  <div class="panel">
+    <p class="panel-title">Your rough tax picture</p>
+    <table class="ledger">
+      <tr>
+        <td>Turnover</td>
+        <td id="row-turnover">£0</td>
+      </tr>
+      <tr>
+        <td class="muted">minus costs</td>
+        <td id="row-expenses">&minus;£0</td>
+      </tr>
+      <tr>
+        <td>Profit</td>
+        <td id="row-profit">£0</td>
+      </tr>
+      <tr>
+        <td class="muted">Tax-free allowance</td>
+        <td id="row-allowance">£0</td>
+      </tr>
+      <tr>
+        <td>Income Tax (rough)</td>
+        <td id="row-tax">£0</td>
+      </tr>
+      <tr>
+        <td>Class 4 National Insurance</td>
+        <td id="row-ni">£0</td>
+      </tr>
+      <tr class="total">
+        <td>Total tax + NI (rough)</td>
+        <td id="row-total">£0</td>
+      </tr>
+      <tr class="take-home">
+        <td>Roughly left in your pocket</td>
+        <td id="row-takehome">£0</td>
+      </tr>
+    </table>
+    <p class="ledger-note" id="ledger-note" hidden>This estimate covers your side-hustle profit only — property income is taxed differently and isn't included in these figures, even though it counts toward the MTD threshold above.</p>
+  </div>
+
+  <div class="panel copy-panel">
+    <button type="button" class="copy-btn" id="copy-btn">Copy my result</button>
+    <p class="copy-status" id="copy-status" aria-live="polite"></p>
+  </div>
+
+  <div class="panel explainer">
+    <p class="panel-title">What Making Tax Digital actually changes</p>
+    <p>Right now, most self-employed people and landlords do one tax return a year, usually in a rush every January. Making Tax Digital replaces that with digital record-keeping plus a short update sent to HMRC every three months, followed by one final submission that wraps up the year — the same underlying obligation, reported more often instead of all at once.</p>
+    <p>It isn't new in general — VAT-registered businesses have worked this way for years already. What's rolling out now, in stages through 2026 to 2028, is the income tax version, aimed specifically at self-employed people and landlords whose income crosses the thresholds above.</p>
+    <p>HMRC's own reasoning: a single once-a-year return, reconstructed from memory and old receipts, produces a lot of honest mistakes. Smaller, more frequent updates are meant to catch errors sooner and give a clearer running picture. For the official rules, <a href="https://www.gov.uk/guidance/using-making-tax-digital-for-income-tax" target="_blank" rel="noopener">see gov.uk's guidance directly</a>.</p>
+  </div>
+
+  <div class="cta">
+    <h2>Once MTD applies, you'll need digital records</h2>
+    <p>HMRC requires software that can keep digital records and send quarterly updates automatically. Xero is one of the recognised options, built to handle Making Tax Digital submissions.</p>
+    <!-- TODO: swap this href for your personal Xero affiliate tracking link once your application is approved -->
+    <a class="cta-btn" href="https://www.xero.com/uk/" target="_blank" rel="noopener">Visit Xero</a>
+    <p class="disclosure">This link may earn a small commission if you sign up — it costs you nothing extra.</p>
+  </div>
+
+  <footer>
+    <p>Rough estimate only, using standard England / Wales / Northern Ireland rates for the 2026/27 tax year (Personal Allowance £12,570; Income Tax 20% / 40% / 45%; Class 4 NI 6% then 2% above £50,270). Scotland uses different Income Tax bands. This doesn't account for other income, pension contributions, or personal allowances and reliefs specific to you, and HMRC actually assesses eligibility against your previous tax year's return, so there can be a short lag before a threshold change reaches you.</p>
+    <p>This isn't tax advice — for your specific situation, check gov.uk or speak to an accountant. Nothing you type here is saved or sent anywhere; it's all calculated on your own device.</p>
+    <p class="footer-links"><a href="about.html">About</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const turnoverInput = document.getElementById('turnover');
+  const expensesInput = document.getElementById('expenses');
+  const propertyInput = document.getElementById('property');
+
+  const gbp = (n) => '£' + Math.round(n).toLocaleString('en-GB');
+
+  const THRESHOLDS = { 2026: 50000, 2027: 30000, 2028: 20000 };
+  const SCALE_MAX = 60000; // headroom above the highest threshold
+
+  function calcTax(profit){
+    const ALLOWANCE = 12570;
+    const BASIC_TOP = 50270;
+    const HIGHER_TOP = 125140;
+
+    // personal allowance taper between £100k and £125,140
+    let allowance = ALLOWANCE;
+    if (profit > 100000){
+      allowance = Math.max(0, ALLOWANCE - Math.floor((profit - 100000) / 2));
+    }
+
+    const taxable = Math.max(0, profit - allowance);
+    let tax = 0;
+    if (profit <= BASIC_TOP){
+      tax = taxable * 0.20;
+    } else if (profit <= HIGHER_TOP){
+      const basicBand = BASIC_TOP - allowance;
+      tax = basicBand * 0.20 + (profit - BASIC_TOP) * 0.40;
+    } else {
+      const basicBand = BASIC_TOP - allowance;
+      tax = basicBand * 0.20 + (HIGHER_TOP - BASIC_TOP) * 0.40 + (profit - HIGHER_TOP) * 0.45;
+    }
+
+    // Class 4 NI: 6% between £12,570–£50,270, 2% above
+    let ni = 0;
+    if (profit > 12570){
+      const niBasic = Math.min(profit, 50270) - 12570;
+      ni += niBasic * 0.06;
+      if (profit > 50270){
+        ni += (profit - 50270) * 0.02;
+      }
+    }
+
+    return { allowance, tax: Math.max(0,tax), ni: Math.max(0,ni) };
+  }
+
+  function statusFor(turnover, threshold){
+    return turnover > threshold;
+  }
+
+  function render(){
+    const turnover = Math.max(0, Number(turnoverInput.value) || 0);
+    const expenses = Math.max(0, Number(expensesInput.value) || 0);
+    const property = Math.max(0, Number(propertyInput.value) || 0);
+    const profit = Math.max(0, turnover - expenses);
+    const qualifyingIncome = turnover + property;
+
+    // --- Timeline rows ---
+    [2026,2027,2028].forEach((year) => {
+      const threshold = THRESHOLDS[year];
+      const caught = statusFor(qualifyingIncome, threshold);
+      const fillPct = Math.min(100, (threshold / SCALE_MAX) * 100);
+      const markerPct = Math.min(100, (qualifyingIncome / SCALE_MAX) * 100);
+
+      document.getElementById('fill-' + year).style.width = fillPct + '%';
+      const marker = document.getElementById('marker-' + year);
+      marker.style.left = markerPct + '%';
+      marker.style.backgroundColor = caught ? 'var(--rust)' : 'var(--ink)';
+
+      const statEl = document.getElementById('stat-' + year);
+      statEl.textContent = caught ? 'Caught' : 'Clear';
+      statEl.style.color = caught ? 'var(--rust)' : 'var(--green)';
+    });
+
+    // --- Status card ---
+    const box = document.getElementById('status-box');
+    const head = document.getElementById('status-head');
+    const body = document.getElementById('status-body');
+    box.classList.remove('is-amber','is-rust');
+
+    if (qualifyingIncome > 50000){
+      box.classList.add('is-rust');
+      head.textContent = 'MTD already applies to you';
+      body.textContent = (property > 0
+        ? 'Your side hustle and property income together come to over £50,000, so Making Tax Digital has applied since April 2026 — you should be keeping digital records now.'
+        : 'Your turnover is over £50,000, so Making Tax Digital has applied since April 2026 — you should be keeping digital records now.');
+    } else if (qualifyingIncome > 30000){
+      box.classList.add('is-amber');
+      head.textContent = 'MTD will apply to you from April 2027';
+      body.textContent = "You're clear for now, but once the threshold drops to £30,000 next April, you'll need to start.";
+    } else if (qualifyingIncome > 20000){
+      box.classList.add('is-amber');
+      head.textContent = 'MTD will apply to you from April 2028';
+      body.textContent = "You're clear until the threshold drops again, to £20,000, in April 2028.";
+    } else {
+      head.textContent = "You're not expected to need MTD";
+      body.textContent = 'Your combined income is under every announced threshold so far. Worth another check if things grow.';
+    }
+
+    // --- Trap note ---
+    const trap = document.getElementById('trap-note');
+    if (property > 0){
+      trap.innerHTML = '<strong>Worth knowing:</strong> MTD adds your side-hustle turnover and property income together (' + gbp(turnover) + ' + ' + gbp(property) + ' = ' + gbp(qualifyingIncome) + ') to decide this — not profit from either one, and not just the side hustle alone.';
+    } else if (expenses > 0 && profit < turnover){
+      trap.innerHTML = '<strong>Worth knowing:</strong> MTD looks at what came in (' + gbp(turnover) + '), not what\'s left after costs. Even with ' + gbp(expenses) + ' in expenses bringing your profit down to ' + gbp(profit) + ', it\'s the ' + gbp(turnover) + ' figure HMRC uses to decide this.';
+    } else {
+      trap.innerHTML = '<strong>Worth knowing:</strong> MTD is based on turnover before expenses, not profit — a low-profit side hustle can still be caught if its turnover is high enough.';
+    }
+
+    // --- Tax ledger ---
+    const { allowance, tax, ni } = calcTax(profit);
+    document.getElementById('row-turnover').textContent = gbp(turnover);
+    document.getElementById('row-expenses').textContent = '\u2212' + gbp(expenses);
+    document.getElementById('row-profit').textContent = gbp(profit);
+    document.getElementById('row-allowance').textContent = gbp(allowance);
+    document.getElementById('row-tax').textContent = gbp(tax);
+    document.getElementById('row-ni').textContent = gbp(ni);
+    document.getElementById('row-total').textContent = gbp(tax + ni);
+    document.getElementById('row-takehome').textContent = gbp(Math.max(0, profit - tax - ni));
+    document.getElementById('ledger-note').hidden = (property <= 0);
+  }
+
+  let t;
+  function debouncedRender(){
+    clearTimeout(t);
+    t = setTimeout(render, 80);
+  }
+
+  turnoverInput.addEventListener('input', debouncedRender);
+  expensesInput.addEventListener('input', debouncedRender);
+  propertyInput.addEventListener('input', debouncedRender);
+
+  const copyBtn = document.getElementById('copy-btn');
+  const copyStatus = document.getElementById('copy-status');
+  copyBtn.addEventListener('click', async () => {
+    const headText = document.getElementById('status-head').textContent;
+    const summary = headText + ' (turnover ' + gbp(Math.max(0, Number(turnoverInput.value) || 0)) + ') — checked at ' + location.href;
+    try{
+      await navigator.clipboard.writeText(summary);
+      copyStatus.textContent = 'Copied — paste it anywhere.';
+    }catch(err){
+      copyStatus.textContent = 'Couldn\'t copy automatically — select the result above and copy manually.';
+    }
+    setTimeout(() => { copyStatus.textContent = ''; }, 4000);
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
