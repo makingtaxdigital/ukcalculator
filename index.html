@@ -3,12 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free calculator: find out if and when HMRC's Making Tax Digital rules apply to your UK side hustle, based on the 2026-2028 turnover thresholds, plus a rough tax estimate.">
-<meta property="og:title" content="Will Making Tax Digital catch your side hustle?">
-<meta property="og:description" content="A free calculator for UK side-hustlers — check if HMRC's new digital tax rules apply to you, and when.">
+<meta name="description" content="Free calculator: find out if and when HMRC's Making Tax Digital rules apply to your trading or property income, based on the 2026-2028 turnover thresholds, plus a rough tax estimate.">
+<meta property="og:title" content="Does Making Tax Digital apply to you?">
+<meta property="og:description" content="A free calculator for anyone with trading or property income in the UK — check if HMRC's new digital tax rules apply to you, and when.">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<title>Will Making Tax Digital catch your side hustle?</title>
+<meta property="og:url" content="https://makingtaxdigital.github.io/ukcalculator/">
+<meta property="og:image" content="https://makingtaxdigital.github.io/ukcalculator/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Does Making Tax Digital apply to you?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,540;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,18 +21,19 @@
 
   :root{
     --ink:#16212C;
-    --ink-soft:#56616B;
+    --ink-soft:#8D99A3;
     --paper:#EFF1EC;
-    --surface:#FFFFFF;
-    --line:#D9DDD3;
-    --line-strong:#B9C0B4;
+    --paper-soft:#4A5560;
+    --surface:#1E2B38;
+    --line:#2C3944;
+    --line-strong:#42505C;
 
-    --green:#1E6E52;
-    --green-tint:#E3EEE7;
-    --amber:#8C5D1E;
-    --amber-tint:#F2E7D3;
-    --rust:#9C3D28;
-    --rust-tint:#F3E0D9;
+    --green:#5FBF95;
+    --green-tint:#1D3229;
+    --amber:#E0AC5F;
+    --amber-tint:#3A2E18;
+    --rust:#E2896D;
+    --rust-tint:#3B2620;
 
     --font-display:'Fraunces', Georgia, serif;
     --font-body:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -42,8 +48,8 @@
 
   body{
     margin:0;
-    background:var(--paper);
-    color:var(--ink);
+    background:var(--ink);
+    color:var(--paper);
     font-family:var(--font-body);
     font-size:16px;
     line-height:1.55;
@@ -124,14 +130,14 @@
     align-items:center;
     border:1px solid var(--line-strong);
     border-radius:var(--radius);
-    background:var(--paper);
+    background:var(--ink);
     overflow:hidden;
     transition:border-color .15s ease, box-shadow .15s ease;
   }
 
   .money-input:focus-within{
-    border-color:var(--ink);
-    box-shadow:0 0 0 3px rgba(22,33,44,0.1);
+    border-color:var(--paper);
+    box-shadow:0 0 0 3px rgba(239,241,236,0.12);
   }
 
   .money-input .sym{
@@ -149,7 +155,7 @@
     font-family:var(--font-body);
     font-size:17px;
     font-weight:600;
-    color:var(--ink);
+    color:var(--paper);
     font-variant-numeric:tabular-nums;
     min-width:0;
   }
@@ -194,7 +200,7 @@
   .tl-track{
     position:relative;
     height:10px;
-    background:var(--paper);
+    background:var(--ink);
     border:1px solid var(--line);
     border-radius:3px;
   }
@@ -214,9 +220,9 @@
     width:14px;
     height:14px;
     border-radius:50%;
-    background:var(--ink);
-    border:2px solid var(--surface);
-    box-shadow:0 0 0 1px var(--ink);
+    background:var(--paper);
+    border:2px solid var(--ink);
+    box-shadow:0 0 0 1px var(--paper);
     transform:translate(-50%,-50%);
     transition:left .5s cubic-bezier(.2,.7,.3,1), background-color .3s ease;
   }
@@ -255,7 +261,7 @@
   .status p{
     margin:0;
     font-size:14.5px;
-    color:var(--ink);
+    color:var(--paper);
   }
 
   .trap-note{
@@ -265,7 +271,7 @@
     font-size:13.5px;
     color:var(--ink-soft);
   }
-  .trap-note strong{ color:var(--ink); }
+  .trap-note strong{ color:var(--paper); }
 
   /* ---------- Tax table ---------- */
 
@@ -298,7 +304,7 @@
     padding-top:14px;
     font-weight:700;
     font-size:15.5px;
-    border-top:2px solid var(--ink);
+    border-top:2px solid var(--paper);
     border-bottom:0;
   }
 
@@ -338,7 +344,7 @@
     transition:border-color .15s ease, background-color .15s ease;
   }
   .copy-btn:hover{ border-color:var(--ink); }
-  .copy-btn:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+  .copy-btn:focus-visible{ outline:2px solid var(--paper); outline-offset:2px; }
 
   .copy-status{
     margin:0;
@@ -351,18 +357,18 @@
 
   .explainer p{
     font-size:14.5px;
-    color:var(--ink);
+    color:var(--paper);
     margin:0 0 14px;
   }
   .explainer p:last-child{ margin-bottom:0; }
-  .explainer a{ color:var(--ink); text-decoration-color:var(--line-strong); }
-  .explainer a:hover{ text-decoration-color:var(--ink); }
+  .explainer a{ color:var(--paper); text-decoration-color:var(--line-strong); }
+  .explainer a:hover{ text-decoration-color:var(--paper); }
 
   /* ---------- CTA ---------- */
 
   .cta{
-    background:var(--ink);
-    color:var(--paper);
+    background:var(--paper);
+    color:var(--ink);
     padding:26px;
     border-radius:var(--radius);
   }
@@ -372,20 +378,20 @@
     font-weight:540;
     font-size:20px;
     margin:0 0 8px;
-    color:#fff;
+    color:var(--ink);
   }
 
   .cta p{
     font-size:14.5px;
-    color:#C7CDC3;
+    color:var(--paper-soft);
     margin:0 0 18px;
     max-width:48ch;
   }
 
   .cta-btn{
     display:inline-block;
-    background:var(--surface);
-    color:var(--ink);
+    background:var(--ink);
+    color:var(--paper);
     text-decoration:none;
     font-weight:600;
     font-size:14.5px;
@@ -394,11 +400,11 @@
     transition:opacity .15s ease;
   }
   .cta-btn:hover{ opacity:.85; }
-  .cta-btn:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+  .cta-btn:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
 
   .disclosure{
     font-size:12.5px;
-    color:#AFB6A9;
+    color:var(--paper-soft);
     margin:14px 0 0;
   }
 
@@ -419,7 +425,7 @@
   a{ color:inherit; }
 
   :focus-visible{
-    outline:2px solid var(--ink);
+    outline:2px solid var(--paper);
     outline-offset:2px;
   }
 
@@ -440,15 +446,15 @@
 <div class="wrap">
 
   <header>
-    <h1>Will Making Tax Digital catch your side hustle?</h1>
-    <p class="lede">HMRC's new digital tax rules are rolling out in stages. Add up what your side hustle actually brings in, and find out if — and when — the rules reach you.</p>
+    <h1>Does Making Tax Digital apply to you?</h1>
+    <p class="lede">HMRC's new digital tax rules are rolling out in stages. Add up what you actually bring in, and find out if — and when — the rules reach you.</p>
   </header>
 
   <div class="panel">
     <p class="panel-title">Your numbers</p>
 
     <div class="field">
-      <label for="turnover">What your side hustle brings in</label>
+      <label for="turnover">What you bring in</label>
       <p class="hint">Total sales this year, before any costs come out</p>
       <div class="money-input">
         <span class="sym">£</span>
@@ -467,7 +473,7 @@
 
     <div class="field">
       <label for="property">Rental or property income (if any)</label>
-      <p class="hint">MTD counts this together with your side hustle — leave at 0 if none</p>
+      <p class="hint">MTD counts this together with your income — leave at 0 if none</p>
       <div class="money-input">
         <span class="sym">£</span>
         <input type="number" id="property" inputmode="numeric" min="0" step="500" value="0">
@@ -559,7 +565,7 @@
         <td id="row-takehome">£0</td>
       </tr>
     </table>
-    <p class="ledger-note" id="ledger-note" hidden>This estimate covers your side-hustle profit only — property income is taxed differently and isn't included in these figures, even though it counts toward the MTD threshold above.</p>
+    <p class="ledger-note" id="ledger-note" hidden>This estimate covers your trading profit only — property income is taxed differently and isn't included in these figures, even though it counts toward the MTD threshold above.</p>
   </div>
 
   <div class="panel copy-panel">
@@ -576,16 +582,13 @@
 
   <div class="cta">
     <h2>Once MTD applies, you'll need digital records</h2>
-    <p>HMRC requires software that can keep digital records and send quarterly updates automatically. Xero is one of the recognised options, built to handle Making Tax Digital submissions.</p>
-    <!-- TODO: swap this href for your personal Xero affiliate tracking link once your application is approved -->
-    <a class="cta-btn" href="https://www.xero.com/uk/" target="_blank" rel="noopener">Visit Xero</a>
-    <p class="disclosure">This link may earn a small commission if you sign up — it costs you nothing extra.</p>
+    <p>HMRC requires software that can keep digital records and send quarterly updates automatically — see the <a href="faq.html">FAQ</a> for what actually counts as MTD-compliant software.</p>
   </div>
 
   <footer>
     <p>Rough estimate only, using standard England / Wales / Northern Ireland rates for the 2026/27 tax year (Personal Allowance £12,570; Income Tax 20% / 40% / 45%; Class 4 NI 6% then 2% above £50,270). Scotland uses different Income Tax bands. This doesn't account for other income, pension contributions, or personal allowances and reliefs specific to you, and HMRC actually assesses eligibility against your previous tax year's return, so there can be a short lag before a threshold change reaches you.</p>
     <p>This isn't tax advice — for your specific situation, check gov.uk or speak to an accountant. Nothing you type here is saved or sent anywhere; it's all calculated on your own device.</p>
-    <p class="footer-links"><a href="about.html">About</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></p>
+    <p class="footer-links"><a href="about.html">About</a> &nbsp;&middot;&nbsp; <a href="faq.html">FAQ</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></p>
   </footer>
 
 </div>
@@ -658,7 +661,7 @@
       document.getElementById('fill-' + year).style.width = fillPct + '%';
       const marker = document.getElementById('marker-' + year);
       marker.style.left = markerPct + '%';
-      marker.style.backgroundColor = caught ? 'var(--rust)' : 'var(--ink)';
+      marker.style.backgroundColor = caught ? 'var(--rust)' : 'var(--paper)';
 
       const statEl = document.getElementById('stat-' + year);
       statEl.textContent = caught ? 'Caught' : 'Clear';
@@ -675,7 +678,7 @@
       box.classList.add('is-rust');
       head.textContent = 'MTD already applies to you';
       body.textContent = (property > 0
-        ? 'Your side hustle and property income together come to over £50,000, so Making Tax Digital has applied since April 2026 — you should be keeping digital records now.'
+        ? 'Your trading and property income together come to over £50,000, so Making Tax Digital has applied since April 2026 — you should be keeping digital records now.'
         : 'Your turnover is over £50,000, so Making Tax Digital has applied since April 2026 — you should be keeping digital records now.');
     } else if (qualifyingIncome > 30000){
       box.classList.add('is-amber');
@@ -693,11 +696,11 @@
     // --- Trap note ---
     const trap = document.getElementById('trap-note');
     if (property > 0){
-      trap.innerHTML = '<strong>Worth knowing:</strong> MTD adds your side-hustle turnover and property income together (' + gbp(turnover) + ' + ' + gbp(property) + ' = ' + gbp(qualifyingIncome) + ') to decide this — not profit from either one, and not just the side hustle alone.';
+      trap.innerHTML = '<strong>Worth knowing:</strong> MTD adds your trading turnover and property income together (' + gbp(turnover) + ' + ' + gbp(property) + ' = ' + gbp(qualifyingIncome) + ') to decide this — not profit from either one, and not just your trading income alone.';
     } else if (expenses > 0 && profit < turnover){
       trap.innerHTML = '<strong>Worth knowing:</strong> MTD looks at what came in (' + gbp(turnover) + '), not what\'s left after costs. Even with ' + gbp(expenses) + ' in expenses bringing your profit down to ' + gbp(profit) + ', it\'s the ' + gbp(turnover) + ' figure HMRC uses to decide this.';
     } else {
-      trap.innerHTML = '<strong>Worth knowing:</strong> MTD is based on turnover before expenses, not profit — a low-profit side hustle can still be caught if its turnover is high enough.';
+      trap.innerHTML = '<strong>Worth knowing:</strong> MTD is based on turnover before expenses, not profit — low-profit trading can still be caught if turnover is high enough.';
     }
 
     // --- Tax ledger ---

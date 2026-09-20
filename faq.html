@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Frequently asked questions about Making Tax Digital: the £1,000 threshold, combined property income, and which software counts as MTD-compliant.">
+<title>FAQ — Making Tax Digital Calculator</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,440;9..144,540;9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16212C; --ink-soft:#8D99A3; --paper:#EFF1EC; --paper-soft:#4A5560; --surface:#1E2B38;
+    --line:#2C3944; --line-strong:#42505C;
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius:4px; --max:760px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--ink); color:var(--paper);
+    font-family:var(--font-body); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:44px 20px 64px; }
+  a{ color:var(--paper); }
+  .back{ display:inline-block; font-size:13.5px; font-weight:600; color:var(--ink-soft); text-decoration:none; margin-bottom:22px; }
+  .back:hover{ color:var(--paper); }
+  h1{
+    font-family:var(--font-display); font-optical-sizing:auto; font-weight:540;
+    font-size:clamp(26px, 6vw, 36px); line-height:1.16; letter-spacing:-0.01em;
+    margin:0 0 22px;
+  }
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; margin-bottom:20px;
+  }
+  .panel h2{
+    font-family:var(--font-display); font-weight:540; font-size:19px;
+    margin:0 0 10px; line-height:1.3;
+  }
+  .panel p{ font-size:15px; margin:0 0 12px; }
+  .panel p:last-child{ margin-bottom:0; }
+  .panel ul{ font-size:15px; margin:0 0 12px; padding-left:20px; }
+  .panel li{ margin-bottom:6px; }
+  footer{ margin-top:26px; font-size:12.5px; color:var(--ink-soft); }
+  footer a{ color:var(--ink-soft); }
+  @media (max-width:480px){ .wrap{ padding:32px 16px 48px; } .panel{ padding:20px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to the calculator</a>
+  <h1>Frequently asked questions</h1>
+
+  <div class="panel">
+    <h2>Do I need to register if I earn under &pound;1,000?</h2>
+    <p>No. HMRC's trading allowance means self-employment turnover under &pound;1,000 in a tax year doesn't need to be reported at all. If your self-employed income is less than that, you don't need to register as self-employed, and Making Tax Digital doesn't come into it.</p>
+    <p>Once your turnover goes over &pound;1,000, you do need to register &mdash; though registering doesn't necessarily mean you'll owe tax, since that depends on your profit after expenses and your personal allowance.</p>
+  </div>
+
+  <div class="panel">
+    <h2>What if I have self-employed income AND rental or property income?</h2>
+    <p>They count together, not separately. HMRC adds your self-employment turnover and your property income into one combined figure &mdash; called qualifying income &mdash; and checks that total against the threshold.</p>
+    <p>So someone earning &pound;25,000 from self-employment and &pound;10,000 from a rental property has &pound;35,000 in qualifying income, even though neither amount alone crosses the &pound;30,000 mark. This is one of the most commonly missed parts of the rules, which is why the calculator on this site asks about both.</p>
+  </div>
+
+  <div class="panel">
+    <h2>What software actually counts as MTD-compliant?</h2>
+    <p>It has to be software HMRC has specifically recognised as capable of keeping digital records and sending quarterly updates directly to HMRC &mdash; a spreadsheet or a general accounting app on its own doesn't qualify unless it connects to HMRC in the right way.</p>
+    <p>Well-known recognised options include QuickBooks, FreeAgent, and Coconut, among others. HMRC keeps a full, up-to-date list of recognised software on gov.uk, which is worth checking directly since new tools are added over time.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Does this apply to me if I only sell occasionally, like clearing out old clothes?</h2>
+    <p>Generally no. HMRC has been clear that selling your own personal, secondhand items &mdash; clothes you no longer wear, old furniture, and similar &mdash; isn't trading, and doesn't count towards these thresholds at all. This is specifically about income from a genuine trade: buying or making things to sell for profit, or providing a service, on a regular basis.</p>
+  </div>
+
+  <div class="panel">
+    <h2>I'm not sure my situation fits these examples &mdash; what should I do?</h2>
+    <p>This calculator gives a general picture based on the rules as published, but it isn't personal advice. For anything specific to your situation, <a href="https://www.gov.uk/guidance/using-making-tax-digital-for-income-tax" target="_blank" rel="noopener">gov.uk</a> or a qualified accountant is the right place to check.</p>
+  </div>
+
+  <footer>
+    <p><a href="index.html">Calculator</a> &nbsp;&middot;&nbsp; <a href="about.html">About</a> &nbsp;&middot;&nbsp; <a href="privacy.html">Privacy</a></p>
+  </footer>
+</div>
+</body>
+</html>
